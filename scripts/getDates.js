@@ -69,16 +69,21 @@ const courses = [
 function renderCourses(filter = 'All') {
     courseGrid.innerHTML = '';
     const filteredCourses = courses.filter((course) => filter === 'All' || course.subject === filter);
+    const totalCredits = filteredCourses.reduce((total, course) => total + course.credits, 0);
     filteredCourses.forEach((course, index) => {
         const courseBox = document.createElement('div');
         courseBox.className = `course-box ${index % 3 === 0 || index % 3 === 2 ? '' : 'light'}`;
         if (!course.completed) {
             courseBox.classList.add('not-completed');
         }
-        courseBox.textContent = `${course.subject} ${course.number}`;
+        courseBox.textContent = `${course.subject} ${course.number} - ${course.title} (${course.credits})`;
         courseBox.dataset.index = index;
         courseGrid.appendChild(courseBox);
     });
+    const totalCreditsElement = document.createElement('div');
+    totalCreditsElement.className = 'total-credits';
+    totalCreditsElement.textContent = `Total Credits: ${totalCredits}`;
+    courseGrid.appendChild(totalCreditsElement);
 }
 
 function setupNavButtons() {
