@@ -62,14 +62,16 @@ nav ul li a {
     padding: 5px 10px;
 }
 
-nav ul li a.active {
-    color: yellow;
+nav ul li a:hover {
+    color:rgb(20, 20, 230);
 }
+
 
 .home-header {
     color: #000000;
-    margin-bottom: 15px;
+    margin: 20px;
     font-size: 24px;
+    text-align:center;
 }
 
 .container {
@@ -87,6 +89,19 @@ nav ul li a.active {
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
+.box-content {
+    padding: 35px;
+}
+
+.brazil-content {
+    text-align:center;
+}
+
+figcaption {
+    font-weight:bold;
+}
+
 
 .box-header {
     background-color: #1b4965;
