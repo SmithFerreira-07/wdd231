@@ -87,6 +87,9 @@ nav ul li a:hover {
     margin: 20px;
     font-size: 24px;
     text-align:center;
+    background-color:#D2D2D2;
+    padding:10px;
+    border-radius:10px;
 }
 
 .container {
@@ -211,12 +214,13 @@ footer {
 
     .hamburger {
         display:flex;
+        font-size:3.0rem;
     }
     nav {
         display:none;
         border-bottom:none;
         border-radius:0;
-        background-color: #1b4965;
+        background-color: #333;
     }
     nav.active {
         display: block; 
@@ -233,8 +237,12 @@ footer {
         
     }
 
+    nav ul li a {
+        color:white;
+    }
+
     nav ul li a:hover {
-        color:rgb(20, 20, 230);
+        color:#6299d8;
     }
    
 
