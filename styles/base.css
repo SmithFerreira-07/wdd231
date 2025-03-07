@@ -66,6 +66,15 @@ nav ul li a:hover {
     color:rgb(20, 20, 230);
 }
 
+.hamburger {
+    display:none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 
 .home-header {
     color: #000000;
@@ -109,4 +118,59 @@ figcaption {
     padding: 10px 15px;
     font-weight: bold;
     text-align: center;
+}
+
+.certificate {
+    grid-column: 1 / span 2;
+}
+
+
+@media screen and (max-width: 767px) {
+    .container {
+        display:flex;
+        flex-direction: column;
+    }
+    .nav-box {
+        display:flex;
+        align-items:center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    body {
+        padding: 0;
+    }
+    
+    header {
+        border-radius: 0;
+    }
+
+    .hamburger {
+        display:flex;
+    }
+    nav {
+        display:none;
+        border-bottom:none;
+        border-radius:0;
+        background-color: #1b4965;
+    }
+    nav.active {
+        display: block; 
+    }
+    nav ul {
+        display: flex;
+        flex-direction:column;
+        gap:30px;
+    }
+
+    nav li {
+        margin-right: 0;
+        margin-bottom: 30px;
+        
+    }
+
+    nav ul li a:hover {
+        color:rgb(20, 20, 230);
+    }
+   
+
 }

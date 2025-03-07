@@ -18,7 +18,8 @@
             <h1>Eric Rafael Calado Ferreira</h1>
         </div>
         <div class="nav-box">
-            <nav class="nav">
+            <button class="hamburger" id="menuButton">≡</button>
+            <nav class="nav" id="homeNav">
                 <ul>
                     <li><a href="#"><b>Home</a></b></li>
                     <li><a href="#"><b>Chamber</a></b></li>
@@ -26,12 +27,13 @@
                     <li><a href="https://www.linkedin.com"><b>Linkedin</b></a></li>
                 </ul>
             </nav>
+            
         </div>
     </header>
     <main>
         <h1 class="home-header">Home</h1>
         <div class="container">
-            <div class="box course-work">
+            <section class="box course-work">
                 <div class="box-header">
                     <h2>Course Work</h2>
                 </div>
@@ -42,16 +44,29 @@
                         <li></li>
                     </ul>
                 </div>
-            </div>
-            <div class="box brazil">
-                <div class="box-header"><h2>Rio de Janeiro, Brazil</h2></div>
+            </section>
+            <section class="box brazil">
+                <div class="box-header">
+                    <h2>Rio de Janeiro, Brazil</h2>
+                </div>
                 <div class="box-content brazil-content">
                     <picture>
-                    <img class="border-image" src="images/christ_6_13.webp" alt="Christ Reedeemer">
-                    <figcaption>Christ the Redeemer</figcaption>
+                        <source media="(max-width:800px)" srcset="images/christ_mobile.webp">
+                        <img class="border-image" src="images/christ_6_13.webp" alt="Christ Reedeemer">
+                        <figcaption>Christ the Redeemer</figcaption>
                     </picture>
                 </div>
-            </div>
+            </section>
+            <section class="box certificate">
+                <div class="box-header">Web and Computer Programming Certificate</div>
+                <div class="box-content">
+                    <div class="nav-buttons">
+                        <button class="nav-button">All</button>
+                        <button class="nav-button">CSE</button>
+                        <button class="nav-button">WDD</button>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
     <footer class="footer">
