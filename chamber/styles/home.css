@@ -1,0 +1,35 @@
+.hero-container {
+    position: relative;
+    height: 700px; 
+    background-image: url('../images/Market-Timbuktu-Mali_7_76.webp'); 
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+}
+
+.ticket-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--secondary-color);
+    padding: 8px 16px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    color: var(--text-color);
+    font-weight: bold;
+    z-index: 10;
+}

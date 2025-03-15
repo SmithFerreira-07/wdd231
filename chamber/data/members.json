@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Sahara Tech Solutions",
+        "address": "101 Desert Rd, Timbuktu",
+        "phone": "555-1010",
+        "website": "https://saharatech.com",
+        "image": "saharatech.png",
+        "membership": 3
+    },
+    {
+        "name": "Mali Traders",
+        "address": "202 Market St, Timbuktu",
+        "phone": "555-2020",
+        "website": "https://malitraders.com",
+        "image": "malitraders.png",
+        "membership": 2
+    },
+    {
+        "name": "Golden Dunes Hotel",
+        "address": "303 Oasis Ave, Timbuktu",
+        "phone": "555-3030",
+        "website": "https://goldenduneshotel.com",
+        "image": "goldenduneshotel.png",
+        "membership": 1
+    },
+    {
+        "name": "Timbuktu Artisans",
+        "address": "404 Heritage St, Timbuktu",
+        "phone": "555-4040",
+        "website": "https://timbuktuartisans.com",
+        "image": "timbuktuartisans.png",
+        "membership": 3
+    },
+    {
+        "name": "Niger River Tours",
+        "address": "505 Riverside Ln, Timbuktu",
+        "phone": "555-5050",
+        "website": "https://nigerrivertours.com",
+        "image": "nigerrivertours.png",
+        "membership": 2
+    },
+    {
+        "name": "Oasis Café",
+        "address": "606 Palm St, Timbuktu",
+        "phone": "555-6060",
+        "website": "https://oasiscafetimbuktu.com",
+        "image": "oasiscafe.png",
+        "membership": 1
+    },
+    {
+        "name": "Sankore Bookstore",
+        "address": "707 Knowledge Rd, Timbuktu",
+        "phone": "555-7070",
+        "website": "https://sankorebookstore.com",
+        "image": "sankorebookstore.png",
+        "membership": 3
+    }
+]
