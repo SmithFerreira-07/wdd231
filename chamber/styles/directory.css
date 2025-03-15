@@ -1,6 +1,6 @@
 :root {
-    --primary-color: #530101;   
-    --secondary-color: #F19D9D;  
+    --primary-color: #000;   
+    --secondary-color: #B0B4BF;  
     --background-color: #F5F5F5; 
     --text-color: #000;       
     --accent-color: #D4AF37;     
@@ -21,6 +21,8 @@
 }
 
 .member-card {
+    display:flex;
+    flex-direction: column;
     background: var(--secondary-color);
     padding: 15px;
     border-radius: 8px;

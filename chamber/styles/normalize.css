@@ -2,12 +2,23 @@ html, body, h1, h2, h3, p, ul, ol, li {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
+}
+
+html, body {
+    overflow-x: hidden; 
+    width: 100%;
+}
+
+body {
+    max-width: 100vw;
 }
 
 
+
 :root {
-    --primary-color: #530101;   
-    --secondary-color: #F19D9D;  
+    --primary-color: #000;   
+    --secondary-color: #B0B4BF;  
     --background-color: #F5F5F5; 
     --text-color: #000;       
     --accent-color: #D4AF37;     
@@ -29,12 +40,12 @@ body {
 
 a {
     text-decoration: none;
-    color: var(--primary-color);
+    color: var(--text-color);
     font-weight: bold;
 }
 
 a:hover {
-    color: #000000;
+    border-bottom:2px solid #000
 }
 
 header {
@@ -80,12 +91,19 @@ header {
 #navigation {
     display: flex;
     justify-content: center;
+    width: 100vw;
 }
 
 #navigation ul {
     list-style: none;
     display: flex;
     gap: 5rem;
+}
+
+.active-page {
+    background-color: #fff;
+    padding:10px;
+    border-radius: 3px;
 }
 
 .theme-toggle {
@@ -176,6 +194,7 @@ button:hover {
         position: absolute;
         top: 70px;
         left: 0;
+        right: 0;
         width: 100%;
         background: var(--secondary-color);
         text-align: center;
