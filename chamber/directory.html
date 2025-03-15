@@ -13,20 +13,20 @@
     <link rel="stylesheet" href="styles/directory.css">
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <script defer src="scripts/script.js"></script>
+    <script src="scripts/script.js" defer></script>
 </head>
 <body>
     <header>
         <div class="logo-container">
             <div class="logo">
-                <img src="images/logo.svg" alt="logo">
+                <img src="images/logo.svg" alt="Timbuktu Chamber of Commerce Logo">
             </div>
             <div class="logo-text">
                 <h1>Timbuktu</h1>
                 <p>Chamber of Commerce</p>
             </div>
         </div>
-        <nav>
+        <nav id="navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="directory.html">Directory</a></li>
@@ -35,7 +35,7 @@
             </ul>
         </nav>
         <div class="theme-toggle"></div>
-        <div class="mobile-menu">≡</div>
+        <div class="mobile-menu" id="mobileMenu">≡</div>
     </header>
     <main>
         <div class="first-object">
@@ -47,9 +47,26 @@
         </section>
     </main>
     <footer>
-        <p>&copy; <span id="year"></span> Chamber of Commerce</p>
-        <p>Developed by Eric Rafael Calado Ferreira</p>
-        <p>Last Modified: <span id="lastModified"></span></p>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h3>Timbuktu Chamber of Commerce</h3>
+                <p>10 Rue De La Paix</p>
+                <p>Timbuktu, Mali 999</p>
+                <p><a href="mailto:info@timbuktucc.org">info@timbuktucc.org</a></p>
+                <p>(223) 555-2300</p>
+            </div>
+            <div class="footer-center">
+                <a href="#"><img src="images/youtube.webp" alt="YouTube"></a>
+                <a href="#"><img src="images/x.webp" alt="X"></a>
+                <a href="#"><img src="images/linkedin.webp" alt="LinkedIn"></a>
+            </div>
+            <div class="footer-right">
+                <p>WDD231 Class Project</p>
+                <p>Eric Rafael Calado Ferreira</p>
+                <p>&copy; <span id="year"></span> Timbuktu Chamber of Commerce</p>
+                <p>Last Modification: <span id="lastModified"></span></p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

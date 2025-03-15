@@ -1,3 +1,14 @@
+:root {
+    --primary-color: #530101;   
+    --secondary-color: #F19D9D;  
+    --background-color: #F5F5F5; 
+    --text-color: #000;       
+    --accent-color: #D4AF37;     
+}
+
+
+
+
 .hero-container {
     position: relative;
     height: 700px; 

@@ -4,6 +4,8 @@ document.getElementById("lastModified").textContent = document.lastModified;
 document.addEventListener("DOMContentLoaded", () => {
     const membersContainer = document.getElementById("members");
     const toggleButton = document.getElementById("toggleView");
+    const hamburgerButton = document.getElementById("mobileMenu");
+    const mainNav = document.getElementById("navigation");
 
     async function fetchMembers() {
         try {
@@ -15,4 +17,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function displayMembers(members) {
+        membersContainer.innerHTML = "";
+        members.forEach(member => {
+            const card = document.createElement("div");
+            card.classList.add("member-card");
+            card.innerHTML = `
+                <img src="images/${member.image}" alt="${member.name}">
+                <h3>${member.name}</h3>
+                <p>${member.address}</p>
+                <p>${member.phone}</p>
+                <a href="${member.website}" target="_blank">Visit Website</a>
+            `;
+            membersContainer.appendChild(card);
+        });
+    }
+
+    toggleButton.addEventListener("click", () => {
+        document.body.classList.toggle("list-view");
+    });
+
+    hamburgerButton.addEventListener("click", () => {
+        mainNav.classList.toggle("active");
+    });
+
+    fetchMembers();
+});
     

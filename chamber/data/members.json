@@ -4,7 +4,7 @@
         "address": "101 Desert Rd, Timbuktu",
         "phone": "555-1010",
         "website": "https://saharatech.com",
-        "image": "saharatech.png",
+        "image": "saharatech.svg",
         "membership": 3
     },
     {
@@ -12,7 +12,7 @@
         "address": "202 Market St, Timbuktu",
         "phone": "555-2020",
         "website": "https://malitraders.com",
-        "image": "malitraders.png",
+        "image": "malitraders.svg",
         "membership": 2
     },
     {
@@ -20,7 +20,7 @@
         "address": "303 Oasis Ave, Timbuktu",
         "phone": "555-3030",
         "website": "https://goldenduneshotel.com",
-        "image": "goldenduneshotel.png",
+        "image": "goldenduneshotel.svg",
         "membership": 1
     },
     {
@@ -28,7 +28,7 @@
         "address": "404 Heritage St, Timbuktu",
         "phone": "555-4040",
         "website": "https://timbuktuartisans.com",
-        "image": "timbuktuartisans.png",
+        "image": "timbuktuartisans.svg",
         "membership": 3
     },
     {
@@ -36,7 +36,7 @@
         "address": "505 Riverside Ln, Timbuktu",
         "phone": "555-5050",
         "website": "https://nigerrivertours.com",
-        "image": "nigerrivertours.png",
+        "image": "nigerrivertours.svg",
         "membership": 2
     },
     {
@@ -44,7 +44,7 @@
         "address": "606 Palm St, Timbuktu",
         "phone": "555-6060",
         "website": "https://oasiscafetimbuktu.com",
-        "image": "oasiscafe.png",
+        "image": "oasiscafe.svg",
         "membership": 1
     },
     {
@@ -52,7 +52,7 @@
         "address": "707 Knowledge Rd, Timbuktu",
         "phone": "555-7070",
         "website": "https://sankorebookstore.com",
-        "image": "sankorebookstore.png",
+        "image": "sankorebookstore.svg",
         "membership": 3
     }
 ]
