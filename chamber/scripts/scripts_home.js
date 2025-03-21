@@ -24,6 +24,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function displayWeather(data) {
+        const weatherCode = data.weather[0].id;
+        const temperature = Math.round(data.main.temp);
+        const description = data.weather[0].description;
+        const humidity = data.main.humidity;
+        const windSpeed = Math.round(data.wind.speed);
+
+        let svgFileName = "sunny.svg";
+
+        if (weatherCode >= 200 && weatherCode < 300) {
+            svgFileName = "thunderstorm.svg";
+        } else if (weatherCode >= 300 && weatherCode < 400) {
+            svgFileName = "drizzle.svg";
+        } else if (weatherCode >= 500 && weatherCode < 600) {
+            svgFileName = "rain.svg";
+        } else if (weatherCode >= 600 && weatherCode < 700) {
+            svgFileName = "snow.svg";
+        } else if (weatherCode >= 700 && weatherCode < 800) {
+            svgFileName = "fog.svg";
+        } else if (weatherCode === 800) {
+            svgFileName = "sunny.svg";
+        } else if (weatherCode > 800) {
+            svgFileName = "cloudy.svg"; 
+        }
 
     hamburgerButton.addEventListener("click", () => {
         mainNav.classList.toggle("active");
