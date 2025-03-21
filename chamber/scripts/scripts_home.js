@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const hamburgerButton = document.getElementById("mobileMenu");
     const mainNav = document.getElementById("navigation");
     const weatherContainer = document.getElementById("weatherNow");
-    const API_KEY = "af1fb6099766ced58ea106b357b8fd94";
+    const API_KEY = "";
     const LATITUDE = 16.7666;
     const LONGITUDE = -3.0026;
 
