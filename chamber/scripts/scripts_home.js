@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     async function getWeatherData() {
         try {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE}&lon=${LONGITUDE}&units=metric&appid=${API_KEY}`);
-            
+
             if (!response.ok) {
                 throw new Error("Weather data not available");
             }
-            
+
             const data = await response.json();
             displayWeather(data);
         } catch (error) {
@@ -30,6 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = data.weather[0].description;
         const humidity = data.main.humidity;
         const windSpeed = Math.round(data.wind.speed);
+        const highTemp = Math.round(data.main.temp_max);
+        const lowTemp = Math.round(data.main.temp_min);
+        const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+        const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US', options);
+        const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US', options);
 
         let svgFileName = "sunny.svg";
 
@@ -46,9 +51,30 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (weatherCode === 800) {
             svgFileName = "sunny.svg";
         } else if (weatherCode > 800) {
-            svgFileName = "cloudy.svg"; 
+            svgFileName = "cloudy.svg";
         }
 
+        weatherContainer.innerHTML = `
+        <div class="weather-info">
+            <div class="weather-icon">
+                <img src="images/weather/${svgFileName}" alt="${description}" width="100" height="100">
+            </div>
+            <div class="weather-data">
+                <p class="temp">${temperature}°C</p>
+                <p class="description">${description}</p>
+            </div>
+            <div class="weather-details">
+                <p>Humidity: ${humidity}%</p>
+                <p>Wind: ${windSpeed} m/s</p>
+                <p>High: ${highTemp}°C</p>
+                <p>Low: ${lowTemp}°C</p>
+                <p>Sunrise: ${sunriseTime}</p>
+                <p>Sunset: ${sunsetTime}</p>
+            </div>
+        </div>
+    `;
+    }
+    getWeatherData();
     hamburgerButton.addEventListener("click", () => {
         mainNav.classList.toggle("active");
     });
