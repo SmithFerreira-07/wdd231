@@ -1,29 +1,10 @@
-:root {
-    --primary-color: #000;   
-    --secondary-color: #B0B4BF;  
-    --background-color: #F5F5F5; 
-    --text-color: #000;       
-    --accent-color: #D4AF37;     
-}
-
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-}
-
-main {
-    flex: 1;
-}
-
 h1 {
-    text-align:center;
+    text-align: center;
 }
 
 .first-object {
-    text-align:center;
-    align-items:center;
+    text-align: center;
+    align-items: center;
 }
 
 #members {
@@ -34,7 +15,7 @@ h1 {
 }
 
 .member-card {
-    display:flex;
+    display: flex;
     flex-direction: column;
     background: var(--secondary-color);
     padding: 15px;
@@ -46,7 +27,6 @@ h1 {
     width: 100px;
     height: 100px;
     object-fit: contain;
-    
 }
 
 .list-view #members {
@@ -58,25 +38,6 @@ h1 {
     align-items: center;
     gap: 15px;
     text-align: left;
-    margin:10px;
-}
-
-footer {
-    background-color: var(--secondary-color);
-    padding: 20px 0;
-    margin-top: auto;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.footer-left, .footer-center, .footer-right {
     margin: 10px;
 }
 
