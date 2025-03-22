@@ -42,6 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     hamburgerButton.addEventListener("click", () => {
         mainNav.classList.toggle("active");
+        if (mainNav.classList.contains("active")) {
+            mobileMenu.innerHTML = "x";
+        } else {
+            mobileMenu.innerHTML ="≡";
+        }
     });
 
     fetchMembers();

@@ -139,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const card = document.createElement("div");
             card.classList.add("member-card");
             card.innerHTML = `
+                <h3>Membership Level: ${member.membership === 2 ? 'Silver' : 'Gold'}</h3>
                 <h3>${member.name}</h3>
                 <h4>${member.businessTag}</h4>
                 <div class="member-information">
@@ -160,7 +161,13 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchMembers();
     getWeatherData();
     getWeatherForecast();
+
     hamburgerButton.addEventListener("click", () => {
         mainNav.classList.toggle("active");
+        if (mainNav.classList.contains("active")) {
+            mobileMenu.innerHTML = "x";
+        } else {
+            mobileMenu.innerHTML ="≡";
+        }
     });
 });
