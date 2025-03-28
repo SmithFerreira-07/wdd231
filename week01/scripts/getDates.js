@@ -2,6 +2,7 @@ const courseGrid = document.getElementById('courseGrid');
 const navButtons = document.querySelectorAll('.nav-button');
 const currentYearElement = document.getElementById('currentyear');
 const lastModificationElement = document.getElementById('modification');
+const courseDetails = document.getElementById('course-details');
 
 const courses = [
     {
@@ -79,6 +80,9 @@ function renderCourses(filter = 'All') {
         courseBox.textContent = `${course.subject} ${course.number} - ${course.title} (${course.credits})`;
         courseBox.dataset.index = index;
         courseGrid.appendChild(courseBox);
+        courseBox.addEventListener('click', () => {
+            displayCourseDetails(course);
+        });
     });
     const totalCreditsElement = document.createElement('div');
     totalCreditsElement.className = 'total-credits';
@@ -110,6 +114,27 @@ function updateFooter() {
     currentYearElement.textContent = year;
     const lastModification = document.lastModified;
     lastModificationElement.textContent = lastModification;
+}
+
+function displayCourseDetails(course) {
+    const dialog = document.querySelector('dialog'); 
+    const courseDetails = document.getElementById('course-details'); 
+    courseDetails.innerHTML = `
+    <button id="closeModal">X</button>
+    <h2>${course.subject} ${course.number}</h2>
+    <h3>${course.title}</h3>
+    <p><strong>Credits:</strong> ${course.credits}</p>
+    <p><strong>Certificate:</strong> ${course.certificate}</p>
+    <br></br>
+    <p><strong>Description:</strong><br></br>${course.description}</p>
+    <br></br>
+    <p><strong>Technologies:</strong> ${course.technology.join(', ')}</p>
+    `;
+    dialog.showModal(); 
+    const closeModal = document.getElementById('closeModal');
+    closeModal.addEventListener('click', () => {
+        dialog.close(); 
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
