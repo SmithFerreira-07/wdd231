@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <script src="scripts/script_join.js" defer></script>
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -37,47 +39,75 @@
         <div class="mobile-menu" id="mobileMenu">≡</div>
     </header>
     <main>
-        <form>
-            <label for="fname">First Name:</label>
-            <input type="text" id="fname" name="fname" autocomplete="given-name" required>
-            <label for="lname">Last Name:</label>
-            <input type="text" id="lname" name="lname" autocomplete="family-name" required>
-            <label for="title">Applicant's Title in Organization:</label>
-            <input type="text" id="title" name="title" autocomplete="organization-title" pattern="^[A-Za-z\- ]{7,}$" required>
-            <span class="hint">Please enter your organizational title (minimum 7 characters, only letters, hyphens and spaces allowed)</span>
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" pattern="^\+?[0-9]{1,4}?[0-9]{7,14}$" autocomplete="tel" required>
-            <span class="hint">Please enter your phone number (including country code)</span>
-            <label for="business">Business Name:</label>
-            <input type="text" id="business" name="business" autocomplete="organization" required>
-            <fieldset>
-                <legend>Membership Level:</legend>
-                <div class="radio-option">
-                    <input type="radio" id="np-membership" name="membership" value="np" required>
-                    <label for="np-membership">NP Membership</label>
-                    <span class="description">For non-profit organizations (no fee)</span>
+        <h1>Membership Application Form</h1>
+        <div class="main-container">
+            <section>
+                <form>
+                    <label for="fname">First Name:</label>
+                    <input type="text" id="fname" name="fname" autocomplete="given-name" required>
+                    <label for="lname">Last Name:</label>
+                    <input type="text" id="lname" name="lname" autocomplete="family-name" required>
+                    <label for="title">Applicant's Title in Organization:</label>
+                    <input type="text" id="title" name="title" autocomplete="organization-title"
+                        pattern="^[A-Za-z\- ]{7,}$" required>
+                    <span class="hint">Please enter your organizational title (minimum 7 characters, only letters,
+                        hyphens and spaces allowed)</span>
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" pattern="^\+?[0-9]{1,4}?[0-9]{7,14}$" autocomplete="tel"
+                        required>
+                    <span class="hint">Please enter your phone number (including country code)</span>
+                    <label for="business">Business Name:</label>
+                    <input type="text" id="business" name="business" autocomplete="organization" required>
+                    <fieldset>
+                        <legend>Membership Level:</legend>
+                        <div class="radio-option">
+                            <input type="radio" id="np-membership" name="membership" value="np" required>
+                            <label for="np-membership">NP Membership</label>
+                            <span class="description">For non-profit organizations (no fee)</span>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="bronze-membership" name="membership" value="bronze">
+                            <label for="bronze-membership">Bronze Membership</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="silver-membership" name="membership" value="silver">
+                            <label for="silver-membership">Silver Membership</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="gold-membership" name="membership" value="gold">
+                            <label for="gold-membership">Gold Membership</label>
+                        </div>
+                    </fieldset>
+                    <label for="business-description">Business/Organization Description:</label>
+                    <textarea id="business-description" name="business-description" rows="5" autocomplete="off"
+                        required></textarea>
+                    <span class="hint">Please provide a brief description of your business or organization</span>
+                    <input type="hidden" id="timestamp" name="timestamp">
+                    <button type="submit">Submit Application</button>
+                </form>
+            </section>
+            <section class="membership-levels">
+                <h2>Membership Levels</h2>
+                <div class="membership-option">
+                    <button class="membership-button">Gold Membership Level</button>
+                    <button class="learn-more">Learn More</button>
                 </div>
-                <div class="radio-option">
-                    <input type="radio" id="bronze-membership" name="membership" value="bronze">
-                    <label for="bronze-membership">Bronze Membership</label>
+                <div class="membership-option">
+                    <button class="membership-button">Silver Membership Level</button>
+                    <button class="learn-more">Learn More</button>
                 </div>
-                <div class="radio-option">
-                    <input type="radio" id="silver-membership" name="membership" value="silver">
-                    <label for="silver-membership">Silver Membership</label>
+                <div class="membership-option">
+                    <button class="membership-button">Bronze Membership Level</button>
+                    <button class="learn-more">Learn More</button>
                 </div>
-                <div class="radio-option">
-                    <input type="radio" id="gold-membership" name="membership" value="gold">
-                    <label for="gold-membership">Gold Membership</label>
+                <div class="membership-option">
+                    <button class="membership-button">Non Profit Membership Level</button>
+                    <button class="learn-more">Learn More</button>
                 </div>
-            </fieldset>
-            <label for="business-description">Business/Organization Description:</label>
-            <textarea id="business-description" name="business-description" rows="5" autocomplete="off" required></textarea>
-            <span class="hint">Please provide a brief description of your business or organization</span>
-            <input type="hidden" id="timestamp" name="timestamp">
-            <button type="submit">Submit Application</button>
-        </form>
+            </section>
+        </div>
     </main>
     <footer>
         <div class="footer-container">
@@ -102,4 +132,5 @@
         </div>
     </footer>
 </body>
+
 </html>
