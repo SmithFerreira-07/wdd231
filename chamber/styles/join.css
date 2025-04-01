@@ -140,6 +140,9 @@ textarea:valid {
     align-items: center;
     margin-bottom: 1rem;
     opacity: 0;
+    background-color: #f2f2f5;
+    border-radius:8px;
+    border-left: 4px solid var(--primary-color);
     animation: fadeSlideIn 0.8s ease forwards;
 }
 
@@ -195,7 +198,6 @@ textarea:valid {
     color: var(--background-color);
 }
 
-
 @keyframes fadeSlideIn {
     0% {
         opacity: 0;
@@ -207,21 +209,79 @@ textarea:valid {
     }
 }
 
+.membership-dialog {
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 80%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.membership-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.dialog-content {
+    padding: 2rem;
+    position: relative;
+}
+
+.membership-dialog h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.membership-dialog p {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.membership-dialog h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.membership-dialog ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.membership-dialog ul li {
+    margin-bottom: 0.5rem;
+}
+
+.close-dialog {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    font-weight: bold;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
+    margin-left: auto;
+}
+
+.close-dialog:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
 @media (max-width: 768px) {
     main {
         padding: 1rem;
     }
     
-    form {
-        padding: 1.5rem;
-    }
-    
-    button[type="submit"] {
-        padding: 0.8rem 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
     form {
         padding: 1rem;
     }
@@ -247,8 +307,22 @@ textarea:valid {
     }
 
     .main-container {
-        display: flex;
         flex-direction: column;
     }
     
+    .membership-dialog {
+        width: 95%;
+    }
+    
+    .dialog-content {
+        padding: 1rem;
+    }
+    
+    .membership-dialog h2 {
+        font-size: 1.3rem;
+    }
+    
+    .membership-dialog p {
+        font-size: 1rem;
+    }
 }

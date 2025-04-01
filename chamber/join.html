@@ -42,7 +42,7 @@
         <h1>Membership Application Form</h1>
         <div class="main-container">
             <section>
-                <form>
+                <form action="thankyou.html" method="get">
                     <label for="fname">First Name:</label>
                     <input type="text" id="fname" name="fname" autocomplete="given-name" required>
                     <label for="lname">Last Name:</label>
@@ -92,23 +92,90 @@
                 <h2>Membership Levels</h2>
                 <div class="membership-option">
                     <button class="membership-button">Gold Membership Level</button>
-                    <button class="learn-more">Learn More</button>
+                    <button class="learn-more" data-modal="gold-modal">Learn More</button>
                 </div>
                 <div class="membership-option">
                     <button class="membership-button">Silver Membership Level</button>
-                    <button class="learn-more">Learn More</button>
+                    <button class="learn-more" data-modal="silver-modal">Learn More</button>
                 </div>
                 <div class="membership-option">
                     <button class="membership-button">Bronze Membership Level</button>
-                    <button class="learn-more">Learn More</button>
+                    <button class="learn-more" data-modal="bronze-modal">Learn More</button>
                 </div>
                 <div class="membership-option">
                     <button class="membership-button">Non Profit Membership Level</button>
-                    <button class="learn-more">Learn More</button>
+                    <button class="learn-more" data-modal="np-modal">Learn More</button>
                 </div>
             </section>
         </div>
     </main>
+    <dialog id="gold-modal" class="membership-dialog">
+        <div class="dialog-content">
+            <h2>Gold Membership</h2>
+            <p>$1000/year</p>
+            <h3>Benefits:</h3>
+            <ul>
+                <li>Featured placement on the chamber's homepage</li>
+                <li>Dedicated spotlight section in monthly newsletter</li>
+                <li>Priority booth location at chamber events</li>
+                <li>Complimentary entry to all chamber events</li>
+                <li>Access to exclusive networking sessions</li>
+                <li>Full-page advertisement in annual business directory</li>
+                <li>Direct referrals from chamber staff</li>
+            </ul>
+            <button class="close-dialog">Close</button>
+        </div>
+    </dialog>
+
+    <dialog id="silver-modal" class="membership-dialog">
+        <div class="dialog-content">
+            <h2>Silver Membership</h2>
+            <p>$500/year</p>
+            <h3>Benefits:</h3>
+            <ul>
+                <li>Company listing in chamber's online directory</li>
+                <li>Regular mentions in monthly newsletter</li>
+                <li>Discounted booth rates at chamber events</li>
+                <li>50% discount on chamber event entry fees</li>
+                <li>Half-page advertisement in annual business directory</li>
+                <li>Business promotion on chamber social media</li>
+            </ul>
+            <button class="close-dialog">Close</button>
+        </div>
+    </dialog>
+
+    <dialog id="bronze-modal" class="membership-dialog">
+        <div class="dialog-content">
+            <h2>Bronze Membership</h2>
+            <p>$250/year</p>
+            <h3>Benefits:</h3>
+            <ul>
+                <li>Basic listing in chamber's online directory</li>
+                <li>Invitation to monthly networking events</li>
+                <li>25% discount on chamber event entry fees</li>
+                <li>Quarter-page advertisement in annual business directory</li>
+                <li>Access to chamber resources and local business data</li>
+            </ul>
+            <button class="close-dialog">Close</button>
+        </div>
+    </dialog>
+
+    <dialog id="np-modal" class="membership-dialog">
+        <div class="dialog-content">
+            <h2>Non-Profit Membership</h2>
+            <p>Free</p>
+            <h3>Benefits:</h3>
+            <ul>
+                <li>Basic listing in chamber's online directory</li>
+                <li>Access to networking events</li>
+                <li>Opportunity to collaborate with local businesses</li>
+                <li>Limited access to chamber resources</li>
+                <li>Eligibility for assistance from chamber volunteers</li>
+            </ul>
+            <button class="close-dialog">Close</button>
+        </div>
+    </dialog>
+    
     <footer>
         <div class="footer-container">
             <div class="footer-left">

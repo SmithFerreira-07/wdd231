@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchWeatherData(endpoint) {
         try {
-            const response = await fetch(`${API_BASE_URL}/${endpoint}?lat=${LATITUDE}&lon=${LONGITUDE}&units=metric&appid=af1fb6099766ced58ea106b357b8fd94`);
+            const response = await fetch(`${API_BASE_URL}/${endpoint}?lat=${LATITUDE}&lon=${LONGITUDE}&units=metric&appid=98e597a751f6f73736a3f445f8e52ec6`);
             
             if (!response.ok) {
                 throw new Error(`Weather data not available for ${endpoint}`);
