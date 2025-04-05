@@ -32,9 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const card = document.createElement("div");
             card.classList.add("area-card");
             card.innerHTML = `
-                <h3>${area.name}</h3>
+                <h2>${area.name}</h2>
+                <figure>
+                    <img src="${area.image_path}" alt="${area.name} loading="lazy" />
+                    <figcaption>${area.name}</figcaption>
+                </figure>
                 <p>${area.description}</p>
-                <a href="${area.link}" target="_blank">Learn More</a>
+                
             `;
             areasInfo.appendChild(card);
         });
