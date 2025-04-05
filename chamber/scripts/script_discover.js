@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const areasInfo = document.getElementById("areas");
     const hamburgerButton = document.getElementById("mobileMenu");
     const mainNav = document.getElementById("navigation");
+    const lastVisitMessage = document.getElementById("last-visit-message");
     document.getElementById("year").textContent = new Date().getFullYear();
     document.getElementById("lastModified").textContent = document.lastModified;
     
@@ -10,7 +11,24 @@ document.addEventListener("DOMContentLoaded", () => {
         hamburgerButton.innerHTML = mainNav.classList.contains("active") ? "x" : "≡";
     });
     
-    fetchAreas();
+    function displayLastVisitMessage() {
+        const now = Date.now();
+        const lastVisit = localStorage.getItem('lastVisit');
+        if (!lastVisit) {
+            lastVisitMessage.textContent = "Welcome! Let us know if you have any questions.";
+        } else {
+            const lastVisitDate = parseInt(lastVisit);
+            const daysBetween = Math.floor((now - lastVisitDate) / (1000 * 60 * 60 * 24));
+            
+            if (daysBetween < 1) {
+                lastVisitMessage.textContent = "Back so soon! Awesome!";
+            } else {
+                const dayText = daysBetween === 1 ? "day" : "days";
+                lastVisitMessage.textContent = `You last visited ${daysBetween} ${dayText} ago.`;
+            }
+        }
+        localStorage.setItem('lastVisit', now);
+    }
     
     async function fetchAreas() {
         try {
@@ -44,5 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
             areasInfo.appendChild(card);
         });
     }
+
+    fetchAreas();
+    displayLastVisitMessage();
 });
 

@@ -16,6 +16,20 @@ h2 {
     margin: 1rem;
 }
 
+.visit-message {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 0.75rem 2rem;
+    margin: 1rem auto;
+    border-radius: 4px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 .area-card {
     background-color: var(--secondary-color);
@@ -42,12 +56,14 @@ h2 {
     border-radius: 4px;
     width:80%;
     height:auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 
 .area-card figcaption {
     text-align: center;
     font-style: italic;
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
     font-weight:bold;
 }
 
@@ -114,6 +130,16 @@ h2 {
             "card1 card2 card3"
             "card4 card5 card6"
             "card7 card8 card8";
+    }
+
+    .area-card img {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .area-card img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
     }
 
     .area-card:nth-child(1) { grid-area: card1; }
