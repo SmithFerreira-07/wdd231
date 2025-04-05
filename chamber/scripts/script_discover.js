@@ -34,10 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
             card.innerHTML = `
                 <h2>${area.name}</h2>
                 <figure>
-                    <img src="${area.image_path}" alt="${area.name} loading="lazy" />
+                    <img src="${area.image_path}" alt="${area.name}" loading="lazy" />
                     <figcaption>${area.name}</figcaption>
                 </figure>
                 <p>${area.description}</p>
+                <a href="${area.link}" target="_blank">Learn more</a>
                 
             `;
             areasInfo.appendChild(card);
