@@ -1,0 +1,91 @@
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+:root {
+    --color-1: #0B5CAD;
+    --color-2: #4BB2D8;
+    --color-3: #F2D0A7;
+    --color-4: #FF9E44;  
+}
+
+h1, h2, h3 {
+    font-family: "Poppins", sans-serif;
+    margin: 20px 0;
+}
+
+.color-1 {
+    background-color: var(--color-1);
+    color: white;
+}
+
+.color-2 {
+    background-color: var(--color-2);
+    color: black;
+}
+
+.color-3 {
+    background-color: var(--color-3);
+    color: black;
+}
+
+.color-4 {
+    background-color: var(--color-4);
+    color: black;
+}
+
+.color-5 {
+    background-color: var(--color-5);
+    color: white;
+}
+
+.color-1, .color-2, .color-3, .color-4, .color-5 {
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+picture {
+    display: block;
+    margin: 20px 0;
+    text-align: center;
+}
+
+picture img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+figcaption {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #2C3E50;
+}
+
+.font-1 {
+    font-family: "Roboto", sans-serif;
+}
+
+.font-2 {
+    font-family: "Poppins", sans-serif;
+}
+
+.wireframes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.wireframes picture {
+    flex: 1 1 45%;
+    margin: 10px;
+}
