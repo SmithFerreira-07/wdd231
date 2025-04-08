@@ -21,7 +21,7 @@ h1, h2, h3 {
 
 .color-1 {
     background-color: var(--color-1);
-    color: white;
+    color: black;
 }
 
 .color-2 {
