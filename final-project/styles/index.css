@@ -72,10 +72,6 @@ h2 {
   border-bottom: 3px solid var(--sunset-orange);
 }
 
-.navbar .nav-links a[href*="events"] {
-  border-bottom: 3px solid var(--sand);
-}
-
 .navbar .nav-links a[href*="profile"] {
     border-bottom: 3px solid var(--sand);
   }
@@ -679,7 +675,6 @@ input:checked + .slider:before {
     background-color: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     animation: modalFadeIn 0.3s ease-out;
-    
     margin: auto;
 }
 
