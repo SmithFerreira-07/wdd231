@@ -8,6 +8,7 @@
     <script src="scripts/index.js" type="module" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -21,23 +22,26 @@
             <a href="index.html" class="active">Home</a>
             <a href="surf-spots.html">Surf Spots</a>
             <a href="events.html">Events</a>
+            <a href="profile.html">Profile</a>
         </div>
     </nav>
     <main>
     <section class="hero">
-        <h1>Catch Your Perfect Wave</h1>
-        <p>Real-time wave conditions and forecasts for surfers</p>
-        <div class="search-box">
-            <input type="text" placeholder="Search for your favorite surf spot...">
-            <button>🔍</button>
-        </div>
-        <div class="temp-unit-toggle">
-            <span>°F</span>
-            <label class="switch">
-                <input type="checkbox" id="temp-unit-switch">
-                <span class="slider round"></span>
-            </label>
-            <span>°C</span>
+        <div class="hero-content">
+            <h1>Catch Your Perfect Wave</h1>
+            <p>Real-time wave conditions and forecasts for surfers</p>
+            <div class="search-box">
+                <input type="text" placeholder="Search for your favorite surf spot...">
+                <button>🔍</button>
+            </div>
+            <div class="temp-unit-toggle">
+                <span>°F</span>
+                <label class="switch">
+                    <input type="checkbox" id="temp-unit-switch">
+                    <span class="slider round"></span>
+                </label>
+                <span>°C</span>
+            </div>
         </div>
         <div class="wave"></div>
     </section>

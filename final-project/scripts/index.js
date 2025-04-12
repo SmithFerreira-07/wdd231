@@ -3,7 +3,6 @@ import { SAMPLE_SPOTS_DATA, SAMPLE_EVENTS_DATA } from './modules/data.js';
 import { fetchWeatherData, fetchForecastData, processForecastData, getLocationName } from './modules/weather.js';
 import { createMockMarineData } from './modules/marine.js';
 import { getUserLocation } from './modules/location.js';
-
 import { 
   updateUI, 
   updateForecastUI, 
@@ -13,21 +12,56 @@ import {
   updateTemperatureDisplays
 } from './modules/ui.js';
 
+async function fetchSurfSpotsData() {
+  try {
+    const response = await fetch('./data/surf-spots.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.surfSpots;
+  } catch (error) {
+    console.error('Error fetching surf spots data:', error);
+    return [];
+  }
+}
+
+function getRandomSurfSpots(spotsData, count = 3) {
+  const spots = [...spotsData];
+  
+  for (let i = spots.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [spots[i], spots[j]] = [spots[j], spots[i]];
+  }
+  
+  return spots.slice(0, Math.min(count, spots.length));
+}
+
+function formatSpotsForUI(spotsData) {
+  return spotsData.map(spot => ({
+    name: spot.name,
+    image: `images/surf-spots/${spot.imgUrl}`,
+    conditions: `${spot.difficulty} • ${spot.waveType} • Avg: ${spot.avgWaveHeight}`,
+    link: `surf-spots.html#${spot.id}`,
+    location: spot.location,
+    difficulty: spot.difficulty,
+    waveType: spot.waveType,
+    bestSeason: spot.bestSeason,
+    description: spot.description,
+    avgWaveHeight: spot.avgWaveHeight,
+    maxWaveHeight: spot.maxWaveHeight,
+    surfConsistency: spot.surfConsistency,
+    crowdLevel: spot.crowdLevel
+  }));
+}
+
 async function loadLocationWeather(lat, lng, isUserInitiated = false) {
   try {
     document.querySelectorAll('.loading-indicator').forEach(el => {
       el.textContent = 'Loading data for your location...';
       el.style.display = 'block';
     });
-    
-    if (isUserInitiated) {
-      const locationBtn = document.getElementById('get-location-btn');
-      if (locationBtn) {
-        locationBtn.textContent = '📍 Locating...';
-        locationBtn.disabled = true;
-      }
-    }
-    
+         
     const locationInfo = await getLocationName(lat, lng);
     
     updateLocationDisplay(locationInfo.name, locationInfo.country);
@@ -48,15 +82,7 @@ async function loadLocationWeather(lat, lng, isUserInitiated = false) {
       alert('Unable to get weather for your location. Please try again or search for a specific location.');
     }
     return false;
-  } finally {
-    if (isUserInitiated) {
-      const locationBtn = document.getElementById('get-location-btn');
-      if (locationBtn) {
-        locationBtn.textContent = '📍 Use My Location';
-        locationBtn.disabled = false;
-      }
-    }
-  }
+  } 
 }
 
 function updateLocationDisplay(locationName, countryName = '') {
@@ -160,7 +186,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       await loadDefaultLocationData();
     }
     
-    populateSpots(SAMPLE_SPOTS_DATA);
+    const surfSpotsData = await fetchSurfSpotsData();
+    
+    if (surfSpotsData.length > 0) {
+      const randomSpots = getRandomSurfSpots(surfSpotsData, 3);
+      
+      const formattedSpots = formatSpotsForUI(randomSpots);
+      populateSpots(formattedSpots);
+    } else {
+      populateSpots(SAMPLE_SPOTS_DATA);
+    }
+    
     populateEvents(SAMPLE_EVENTS_DATA);
   } catch (error) {
     console.error('Error initializing app:', error);

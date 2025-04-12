@@ -1,8 +1,11 @@
 import { setupMobileNavigation } from './modules/ui.js';
+import { createModalContainer, showSpotDetails } from './modules/modal.js';
 
 function init() {
   try {
     setupMobileNavigation();
+    
+    createModalContainer();
     
     fetchSurfSpots()
       .then(spotsData => {
@@ -123,12 +126,20 @@ function createSpotCard(spot) {
   waveHeightEl.className = 'spot-wave-height';
   waveHeightEl.textContent = `Avg. Wave Height: ${spot.avgWaveHeight}`;
   
+  const detailsBtn = document.createElement('button');
+  detailsBtn.className = 'view-details-btn';
+  detailsBtn.textContent = 'View Details';
+  detailsBtn.addEventListener('click', () => {
+    showSpotDetails(spot);
+  });
+  
   infoEl.appendChild(nameEl);
   infoEl.appendChild(locationEl);
   infoEl.appendChild(difficultyEl);
   infoEl.appendChild(waveTypeEl);
   infoEl.appendChild(seasonEl);
   infoEl.appendChild(waveHeightEl);
+  infoEl.appendChild(detailsBtn);
   
   spotCardEl.appendChild(imgEl);
   spotCardEl.appendChild(infoEl);

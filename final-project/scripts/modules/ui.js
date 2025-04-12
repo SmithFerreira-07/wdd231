@@ -2,6 +2,7 @@ import { formatTemperature } from './utilities.js';
 import { formatWaveHeight, getWindDirection } from './utilities.js';
 import { useMetric, setUseMetric } from './config.js';
 import { getTideStatus } from './marine.js';
+import { createModalContainer, showSpotDetails } from './modal.js';
 
 const waveHeightValue = document.getElementById('wave-height-value');
 const windValue = document.getElementById('wind-value');
@@ -133,7 +134,11 @@ function createForecastDayElement(day) {
 }
 
 export function populateSpots(spotsData) {
+  if (!spotsContainer) return;
+  
   spotsContainer.innerHTML = '';
+  
+  createModalContainer();
   
   spotsData.forEach(spot => {
     const spotCardEl = document.createElement('div');
@@ -156,17 +161,16 @@ export function populateSpots(spotsData) {
     conditionsEl.className = 'spot-conditions';
     conditionsEl.textContent = spot.conditions;
     
-    const linkEl = document.createElement('div');
-    linkEl.className = 'view-link';
-    
-    const aEl = document.createElement('a');
-    aEl.href = spot.link;
-    aEl.textContent = 'View';
-    linkEl.appendChild(aEl);
+    const detailsBtn = document.createElement('button');
+    detailsBtn.className = 'view-details-btn';
+    detailsBtn.textContent = 'View Details';
+    detailsBtn.addEventListener('click', () => {
+      showSpotDetails(spot);
+    });
     
     infoEl.appendChild(nameEl);
     infoEl.appendChild(conditionsEl);
-    infoEl.appendChild(linkEl);
+    infoEl.appendChild(detailsBtn);
     
     spotCardEl.appendChild(imgEl);
     spotCardEl.appendChild(infoEl);

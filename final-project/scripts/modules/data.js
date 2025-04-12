@@ -1,19 +1,19 @@
 export const SAMPLE_SPOTS_DATA = [
   { 
     name: 'Malibu Beach', 
-    image: 'images/malibu.jpg', 
+    image: 'images/surf-spots/malibu.webp', 
     conditions: 'Current: 4ft • Excellent conditions',
     link: '#malibu' 
   },
   { 
     name: 'Pipeline, Hawaii', 
-    image: 'images/pipeline.jpg', 
+    image: 'images/surf-spots/pipeline.webp', 
     conditions: 'Current: 8ft • Good conditions',
     link: '#pipeline' 
   },
   { 
     name: 'Bondi Beach', 
-    image: 'images/bondi.jpg', 
+    image: 'images/surf-spots/bondi-beach.webp', 
     conditions: 'Current: 3ft • Fair conditions',
     link: '#bondi' 
   }
