@@ -46,6 +46,12 @@ body {
     text-decoration: none;
 }
 
+.navbar .nav-links a.active {
+    background-color: var(--sunset-orange);
+    color: #000000;
+    font-weight: bold;
+}
+
 .hamburger-menu {
     display: none;
     flex-direction: column;
@@ -105,6 +111,17 @@ footer a {
     border-radius: 5px;
 }
 
+.button-primary {
+    background-color: var(--ocean-blue);
+    color: var(--white);
+    font-weight: bold;
+}
+
+.button-secondary {
+    background-color: var(--sunset-orange);
+    color: #000000;
+    font-weight: bold;
+}
 
 @media (max-width: 768px) {
     .hamburger-menu {

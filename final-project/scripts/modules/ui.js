@@ -1,5 +1,5 @@
 import { formatTemperature } from './utilities.js';
-import { formatWaveHeight, getWindDirection } from './utilities.js';
+import { getWindDirection } from './utilities.js';
 import { useMetric, setUseMetric } from './config.js';
 import { getTideStatus } from './marine.js';
 import { createModalContainer, showSpotDetails } from './modal.js';
@@ -54,24 +54,49 @@ export function updateUI(weatherData, marineData) {
 function updateMarineUI(marineData) {
   if (!marineData) return;
   
+  // Update tide information
   const tideInfo = getTideStatus(marineData.tide);
   tideValue.textContent = tideInfo.status;
   tideDetails.textContent = tideInfo.nextTime;
   
+  // Update wind and swell data from WeatherAPI
   if (marineData.marine && marineData.marine.hours && marineData.marine.hours.length > 0) {
     const currentData = marineData.marine.hours[0];
     
-    if (currentData.waveHeight && currentData.waveHeight.noaa) {
-      waveHeightValue.textContent = formatWaveHeight(currentData.waveHeight.noaa);
+    // Update wave height card with swell data
+    if (waveHeightValue) {
+      if (currentData.swellHeight) {
+        const swellInfo = `${currentData.swellHeight} ft`;
+        const swellDetails = document.createElement('div');
+        swellDetails.className = 'condition-details';
+        swellDetails.textContent = `${currentData.swellDirection || 'Unknown'} • ${currentData.swellPeriod || 'N/A'}s`;
+        
+        waveHeightValue.textContent = swellInfo;
+        
+        // Get the parent of waveHeightValue to add details
+        const waveCard = document.getElementById('wave-height-card');
+        if (waveCard) {
+          // Look for existing details to replace, otherwise append
+          const existingDetails = waveCard.querySelector('.condition-details');
+          if (existingDetails) {
+            existingDetails.textContent = swellDetails.textContent;
+          } else {
+            waveCard.appendChild(swellDetails);
+          }
+        }
+      } else {
+        waveHeightValue.textContent = "No swell data";
+      }
     }
     
     if (currentData.windSpeed && currentData.windDirection) {
-      const windSpeedMph = (currentData.windSpeed.noaa * 2.237).toFixed(1);
-      windValue.textContent = `${windSpeedMph} mph`;
+      const windSpeedMph = (currentData.windSpeed * 2.237).toFixed(1); // Convert m/s to mph
+      windValue.textContent = useMetric ? `${currentData.windSpeed.toFixed(1)} m/s` : `${windSpeedMph} mph`;
       
-      if (currentData.windDirection.noaa) {
-        windDetails.textContent = getWindDirection(currentData.windDirection.noaa);
-      }
+      windDetails.textContent = getWindDirection(currentData.windDirection);
+    } else {
+      windValue.textContent = "Data unavailable";
+      windDetails.textContent = "Direction unavailable";
     }
   }
 }

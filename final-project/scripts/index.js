@@ -1,8 +1,8 @@
 import { DEFAULT_LOCATION, setUseMetric } from './modules/config.js';
 import { SAMPLE_SPOTS_DATA, SAMPLE_EVENTS_DATA } from './modules/data.js';
 import { fetchWeatherData, fetchForecastData, processForecastData, getLocationName } from './modules/weather.js';
-import { createMockMarineData } from './modules/marine.js';
-import { getUserLocation } from './modules/location.js';
+import { fetchMarineData, createMockMarineData } from './modules/marine.js';
+import { getUserLocation, getCityCoordinates } from './modules/location.js';
 import { 
   updateUI, 
   updateForecastUI, 
@@ -66,10 +66,14 @@ async function loadLocationWeather(lat, lng, isUserInitiated = false) {
     
     updateLocationDisplay(locationInfo.name, locationInfo.country);
     
-    const weatherData = await fetchWeatherData(lat, lng);
-    const marineData = createMockMarineData();
+    const [weatherData, marineData, forecastData] = await Promise.all([
+      fetchWeatherData(lat, lng),
+      fetchMarineData(lat, lng),
+      fetchForecastData(lat, lng)
+    ]);
     
-    const forecastData = await fetchForecastData(lat, lng);
+    console.log('Marine data from WeatherAPI:', marineData);
+    
     const processedForecastData = processForecastData(forecastData);
     
     updateUI(weatherData, marineData);
@@ -78,10 +82,24 @@ async function loadLocationWeather(lat, lng, isUserInitiated = false) {
     return true;
   } catch (error) {
     console.error('Error loading location weather:', error);
-    if (isUserInitiated) {
-      alert('Unable to get weather for your location. Please try again or search for a specific location.');
+    
+    try {
+      console.warn('Trying fallback to mock marine data');
+      const weatherData = await fetchWeatherData(lat, lng);
+      const mockMarineData = createMockMarineData();
+      const forecastData = await fetchForecastData(lat, lng);
+      const processedForecastData = processForecastData(forecastData);
+      
+      updateUI(weatherData, mockMarineData);
+      updateForecastUI(processedForecastData);
+      return true;
+    } catch (fallbackError) {
+      console.error('Even fallback failed:', fallbackError);
+      if (isUserInitiated) {
+        alert('Unable to get weather for your location. Please try again or search for a specific location.');
+      }
+      return false;
     }
-    return false;
   } 
 }
 
@@ -140,11 +158,39 @@ function setupEventListeners() {
   const searchBox = document.querySelector('.search-box input');
   const searchButton = document.querySelector('.search-box button');
   
+ 
+  async function handleSearch() {
+    const searchQuery = searchBox.value.trim();
+    if (searchQuery) {
+      try {
+        
+        const loadingEl = document.createElement('div');
+        loadingEl.className = 'search-loading';
+        loadingEl.textContent = `Searching for "${searchQuery}"...`;
+        document.querySelector('.search-box').insertAdjacentElement('afterend', loadingEl);
+        
+        
+        const locationData = await getCityCoordinates(searchQuery);
+        console.log('Found coordinates for search:', locationData);
+        
+        
+        document.querySelector('.search-loading')?.remove();
+        await loadLocationWeather(locationData.lat, locationData.lng, true);
+        searchBox.value = '';
+      } catch (error) {
+        console.error('Error searching for location:', error);
+        document.querySelector('.search-loading')?.remove();
+        alert(`Could not find location "${searchQuery}". Please try a different city or check spelling.`);
+      }
+    }
+  }
+  
   if (searchButton && searchBox) {
-    searchButton.addEventListener('click', async () => {
-      const searchQuery = searchBox.value.trim();
-      if (searchQuery) {
-        alert('Search functionality would convert "' + searchQuery + '" to coordinates and fetch data');
+    searchButton.addEventListener('click', handleSearch);
+    searchBox.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        handleSearch();
       }
     });
   }

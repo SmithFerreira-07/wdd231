@@ -1,82 +1,132 @@
-import { STORMGLASS_KEY } from './config.js';
-import { formatWaveHeight, getWindDirection } from './utilities.js';
+import { getWindDirection } from './utilities.js';
+import { WEATHERAPI_KEY } from './config.js';
 
-async function callStormglassAPI(endpoint, params) {
+const WEATHERAPI_URL = 'https://api.weatherapi.com/v1';
+
+export async function fetchMarineData(lat, lng) {
+  console.log(`Fetching marine data for coordinates: ${lat}, ${lng}`);
+  
   try {
-    const paramString = new URLSearchParams(params).toString();
-    const response = await fetch(
-      `https://api.stormglass.io/v2/${endpoint}?${paramString}`,
-      {
-        headers: {
-          'Authorization': STORMGLASS_KEY
-        }
-      }
-    );
+    const locationParam = `${lat},${lng}`;
+    const params = new URLSearchParams({
+      key: WEATHERAPI_KEY,
+      q: locationParam,
+      days: 1,
+      aqi: 'no',
+      alerts: 'no',
+      tide: 'yes' 
+    });
+    
+    const url = `${WEATHERAPI_URL}/marine.json?${params}`;
+    console.log('Requesting WeatherAPI URL:', url);
+    
+    const response = await fetch(url);
     
     if (!response.ok) {
-      throw new Error(`Stormglass API error: ${response.status} for endpoint ${endpoint}`);
+      throw new Error(`WeatherAPI error: ${response.status}`);
     }
     
-    return await response.json();
+    const data = await response.json();
+    console.log('WeatherAPI marine data:', data);
+  
+    return processWeatherAPIData(data);
   } catch (error) {
-    console.error(`Error calling Stormglass API (${endpoint}):`, error);
-    return null;
+    console.error('Error fetching WeatherAPI marine data:', error);
+    console.warn('Falling back to mock data');
+    return createMockMarineData();
   }
 }
 
-export async function fetchMarineData(lat, lng) {
+function processWeatherAPIData(data) {
   try {
-    const now = new Date();
-    const endTime = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     
-    const startStr = now.toISOString();
-    const endStr = endTime.toISOString();
-    
-    const tideParams = {
-      lat: lat,
-      lng: lng,
-      start: startStr,
-      end: endStr
-    };
-    
-    const marineParams = {
-      lat: lat,
-      lng: lng,
-      params: 'waveHeight,windSpeed,windDirection',
-      source: 'noaa'
-    };
-    
-    const tideData = await callStormglassAPI('tide/extremes/point', tideParams);
-    const waveWindData = await callStormglassAPI('weather/point', marineParams);
-    
-    if (!tideData || !waveWindData) {
-      throw new Error('Failed to fetch complete marine data');
+    if (!data || !data.forecast || !data.forecast.forecastday || data.forecast.forecastday.length === 0) {
+      throw new Error('Invalid WeatherAPI data format');
     }
     
+    const currentDay = data.forecast.forecastday[0];
+    const currentHour = new Date().getHours();
+    const hourData = currentDay.hour[currentHour] || currentDay.hour[0];
+    
+    const tidePredictions = [];
+    if (currentDay.tides && currentDay.tides.length > 0 && currentDay.tides[0].tide) {
+      currentDay.tides[0].tide.forEach(tide => {
+        tidePredictions.push({
+          type: tide.type === 'high' ? 'H' : 'L', 
+          t: tide.time,
+          v: tide.height.toString()
+        });
+      });
+    } else {
+      tidePredictions.push(...generateTidePredictions(data.location.lat, data.location.lon));
+    }
+    const windSpeed = hourData.wind_kph / 3.6; 
+    const windDirection = hourData.wind_degree || 0;
+    const swellHeight = hourData.swell_ht_ft || 0;
+    const swellDirection = hourData.swell_dir_16_point || hourData.swell_dir || "Unknown";
+    const swellPeriod = hourData.swell_period_secs || 0;
+    
+   
     return {
-      tide: tideData,
-      marine: waveWindData
+      tide: {
+        predictions: tidePredictions
+      },
+      marine: {
+        hours: [{
+          windSpeed: parseFloat(windSpeed),
+          windDirection: parseInt(windDirection),
+          swellHeight: parseFloat(swellHeight),
+          swellDirection: swellDirection,
+          swellPeriod: parseFloat(swellPeriod)
+        }]
+      }
     };
   } catch (error) {
-    console.error('Error fetching marine data:', error);
-    return null;
+    console.error('Error processing WeatherAPI data:', error);
+    throw error;
   }
+}
+
+function generateTidePredictions(lat, lng) {
+  const now = new Date();
+  const tidePredictions = [];
+  const locationSeed = (Math.abs(lat * 100) + Math.abs(lng * 100)) % 12;
+  const currentHour = now.getHours();
+  const hourInCycle = (currentHour + locationSeed) % 12;
+  const nextTideIsHigh = hourInCycle < 6;
+  const hoursToNextTide = nextTideIsHigh ? 6 - hourInCycle : 12 - hourInCycle;
+  const nextTideTime = new Date(now.getTime() + hoursToNextTide * 60 * 60 * 1000);
+  tidePredictions.push({
+    type: nextTideIsHigh ? 'H' : 'L',
+    t: nextTideTime.toISOString(),
+    v: nextTideIsHigh ? '3.2' : '0.8'
+  });
+  
+  const secondTideTime = new Date(nextTideTime.getTime() + 6 * 60 * 60 * 1000);
+  tidePredictions.push({
+    type: nextTideIsHigh ? 'L' : 'H',
+    t: secondTideTime.toISOString(),
+    v: nextTideIsHigh ? '0.7' : '3.4'
+  });
+  
+  return tidePredictions;
 }
 
 export function getTideStatus(tideData) {
-  if (!tideData || !tideData.data || tideData.data.length === 0) {
+  if (!tideData || !tideData.predictions || tideData.predictions.length === 0) {
     return { status: 'Unknown', nextTime: 'Unknown' };
   }
   
   const now = new Date();
-  const nextTide = tideData.data.find(tide => new Date(tide.time) > now);
+  const predictions = tideData.predictions;
+  const nextTide = predictions.find(tide => new Date(tide.t) > now);
   
   if (!nextTide) {
     return { status: 'Unknown', nextTime: 'Unknown' };
   }
   
-  const isRising = nextTide.type === 'high';
-  const nextTime = new Date(nextTide.time);
+  const isRising = nextTide.type === 'H'; 
+  const nextTime = new Date(nextTide.t);
   const formattedTime = nextTime.toLocaleTimeString('en-US', { 
     hour: 'numeric', 
     minute: '2-digit', 
@@ -85,23 +135,26 @@ export function getTideStatus(tideData) {
   
   return {
     status: isRising ? 'Rising' : 'Falling',
-    nextTime: `Next ${nextTide.type === 'high' ? 'High' : 'Low'}: ${formattedTime}`
+    nextTime: `Next ${nextTide.type === 'H' ? 'High' : 'Low'}: ${formattedTime}`
   };
 }
 
 export function createMockMarineData() {
   return {
     tide: {
-      data: [
-        { type: 'high', time: new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString() }
+      predictions: [
+        { type: 'H', t: new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString(), v: '3.2' },
+        { type: 'L', t: new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString(), v: '0.7' }
       ]
     },
     marine: {
       hours: [
         { 
-          waveHeight: { noaa: 1.2 }, 
-          windSpeed: { noaa: 4.5 },
-          windDirection: { noaa: 280 } 
+          windSpeed: 4.5,
+          windDirection: 280,
+          swellHeight: 5.4,
+          swellDirection: "SE",
+          swellPeriod: 9.9
         }
       ]
     }

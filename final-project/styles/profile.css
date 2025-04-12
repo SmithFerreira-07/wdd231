@@ -3,7 +3,7 @@
 
 .profile-hero {
     background-color: var(--primary-color);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hero.webp');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hero.webp');
     background-size: cover;
     background-position: center;
     padding: 3rem 1rem;
@@ -30,8 +30,9 @@
 }
 
 .navbar .nav-links a.active {
-    background-color: var(--sand);
-    color: black;
+    background-color: var(--sunset-orange);
+    color: #000000;
+    font-weight: bold;
 }
 
 .profile-form-container {
@@ -131,12 +132,14 @@
 .submit-btn {
     background-color: var(--ocean-blue);
     color: var(--white);
+    font-weight: bold;
     flex: 2;
 }
 
 .clear-btn {
     background-color: #f0f0f0;
-    color: #666;
+    color: #000000;
+    font-weight: bold;
     flex: 1;
 }
 

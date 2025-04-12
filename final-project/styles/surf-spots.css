@@ -29,7 +29,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar .nav-links a.active {
   background-color: var(--sunset-orange);
-  color: var(--white);
+  color: #000000;
+  font-weight: bold;
 }
 
 .navbar .nav-links a[href="index.html"] {
@@ -74,7 +75,7 @@ h1, h2, h3, h4 {
     background-color: #55b7de;
     padding: 2rem 1rem;
     text-align: center;
-    color: white;
+    color: #000000;
     position: relative;
     overflow: hidden;
 }
@@ -82,6 +83,8 @@ h1, h2, h3, h4 {
 .page-header h1 {
     margin-bottom: 1rem;
     font-size: 2rem;
+    color: #000000;
+    font-weight: bold;
 }
 
 .page-description {
@@ -182,6 +185,7 @@ h1, h2, h3, h4 {
 .filter-btn.active {
     background-color: var(--ocean-blue);
     color: var(--white);
+    font-weight: bold;
 }
 
 .spot-card {
@@ -241,7 +245,7 @@ h1, h2, h3, h4 {
 
 .spot-location {
     font-size: 1.2rem;
-    color: var(--text-medium);
+    color: #000;
     margin-bottom: 0.5rem;
 }
 
@@ -255,7 +259,13 @@ h1, h2, h3, h4 {
 }
 
 .spot-difficulty {
+    font-size: 1rem;
+    color: #000000;
+    padding: 0.5rem;
     background-color: var(--sand);
+    border-radius: 4px;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
 }
 
 .spot-features {
@@ -292,12 +302,13 @@ h1, h2, h3, h4 {
 .condition-value {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #0d52a5;
+    color: #000000;
 }
 
 .condition-label {
     font-size: 0.8rem;
-    color: #666;
+    color: #000000;
+    font-weight: bold;
 }
 
 .wave-quality {
@@ -311,11 +322,13 @@ h1, h2, h3, h4 {
 .quality-label {
     font-weight: bold;
     margin-bottom: 0.5rem;
+    color: #000000;
 }
 
 .quality-value {
     font-size: 1.5rem;
     color: #0d52a5;
+    font-weight: bold;
 }
 
 .spot-description {
@@ -397,37 +410,32 @@ h1, h2, h3, h4 {
     font-size: 1.2rem;
 }
 
-.modal-container {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.modal-dialog {
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin: auto;
+}
+
+
+.modal-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    transition: backdrop-filter 0.3s ease;
-}
-
-.modal-container.active {
-    display: flex;
 }
 
 .modal-content {
     background-color: white;
     border-radius: 8px;
-    max-width: 800px;
-    width: 90%;
+    width: 100%;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     position: relative;
-    animation: modalFadeIn 0.3s ease-out;
 }
 
 .close-modal {
@@ -494,7 +502,7 @@ h1, h2, h3, h4 {
     padding: 10px;
     margin-top: 15px;
     background-color: var(--sunset-orange);
-    color: white;
+    color: black;
     border: none;
     border-radius: 4px;
     font-size: 1rem;

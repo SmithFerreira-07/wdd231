@@ -1,47 +1,38 @@
 export function createModalContainer() {
-  let modalContainer = document.getElementById('spot-modal-container');
+  let modalDialog = document.getElementById('spot-modal-dialog');
   
-  if (modalContainer) {
-    return modalContainer;
+  if (modalDialog) {
+    return modalDialog;
   }
   
-  modalContainer = document.createElement('div');
-  modalContainer.id = 'spot-modal-container';
-  modalContainer.className = 'modal-container';
-  modalContainer.innerHTML = `
+  modalDialog = document.createElement('dialog');
+  modalDialog.id = 'spot-modal-dialog';
+  modalDialog.className = 'modal-dialog';
+  modalDialog.innerHTML = `
     <div class="modal-content">
       <span class="close-modal">&times;</span>
       <div id="modal-body"></div>
     </div>
   `;
   
-  document.body.appendChild(modalContainer);
+  document.body.appendChild(modalDialog);
   
-  const closeBtn = modalContainer.querySelector('.close-modal');
+  const closeBtn = modalDialog.querySelector('.close-modal');
   closeBtn.addEventListener('click', () => {
-    modalContainer.classList.remove('active');
-    document.body.style.overflow = '';
+    modalDialog.close();
   });
   
-  modalContainer.addEventListener('click', (e) => {
-    if (e.target === modalContainer) {
-      modalContainer.classList.remove('active');
-      document.body.style.overflow = '';
+  modalDialog.addEventListener('click', (e) => {
+    if (e.target === modalDialog) {
+      modalDialog.close();
     }
   });
   
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalContainer.classList.contains('active')) {
-      modalContainer.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  });
-  
-  return modalContainer;
+  return modalDialog;
 }
 
 export function showSpotDetails(spot) {
-  const modalContainer = createModalContainer();
+  const modalDialog = createModalContainer();
   const modalBody = document.getElementById('modal-body');
   
   let imageUrl = spot.image || `images/surf-spots/${spot.imgUrl}`;
@@ -118,6 +109,5 @@ export function showSpotDetails(spot) {
   modalContent += `</div>`;
   
   modalBody.innerHTML = modalContent;
-  modalContainer.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  modalDialog.showModal();
 }

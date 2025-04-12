@@ -21,14 +21,6 @@ export function metersToFeet(meters) {
   return (meters * 3.28084).toFixed(1);
 }
 
-export function formatWaveHeight(heightInMeters) {
-  const feet = metersToFeet(heightInMeters);
-  const range = (feet * 0.2).toFixed(1);
-  const lower = (parseFloat(feet) - parseFloat(range)).toFixed(1);
-  const upper = (parseFloat(feet) + parseFloat(range)).toFixed(1);
-  return `${lower}-${upper} ft`;
-}
-
 export function getWindDirection(degrees, beachOrientation = 270) {
   const difference = Math.abs(degrees - beachOrientation);
   if (difference <= 90 || difference >= 270) {
